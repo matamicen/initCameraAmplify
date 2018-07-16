@@ -52,7 +52,7 @@ export default class App extends Component {
             onPress={this.takePicture.bind(this)}
             style = {styles.capture}
         >
-            <Text style={{fontSize: 14}}> SNAP2 </Text>
+            <Text style={{fontSize: 14}}> SNAP </Text>
         </TouchableOpacity>
         </View>
       </View>
