@@ -11,8 +11,9 @@ import {  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View} from 'react-native';
+  View, Modal, Button} from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import Muestro from './Muestro';
 
 
 // const instructions = Platform.select({
@@ -25,12 +26,34 @@ import { RNCamera } from 'react-native-camera';
 
 export default class App extends Component {
 
+  state = {
+    photoConfirm: false,
+    url: ''
+  };
+
+  openModalPhotoConfirmation = () => {
+    
+    this.setState({
+      photoConfirm: true
+    });
+  }
+
+  closeModalPhotoConfirmation = () => {
+
+    this.setState({
+      photoConfirm: false
+    });
+  }
 
   takePicture = async function() {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options)
       console.log(data.uri);
+      this.setState({
+        url: data.uri
+      });
+      this.openModalPhotoConfirmation();
     }
   };
 
@@ -48,6 +71,27 @@ export default class App extends Component {
             permissionDialogMessage={'We need your permission to use your camera phone'}
         />
         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+       
+        <Modal visible={this.state.photoConfirm}  transparent={true} animationType={"slide"} onRequestClose={() => console.log('Close was requested')}>
+              
+              <View style={{ margin:20,
+                   padding:20, 
+                  backgroundColor : 'rgba(0,0,0,0.85)',
+                   bottom: 20,
+                   left: 2,
+                   right: 2,
+                   position: 'absolute',
+                   alignItems: 'center'                      
+                    }}>
+                   
+                    <Muestro url={this.state.url} />
+                  
+                     <Button onPress={() => this.closeModalPhotoConfirmation()} title="Cierro" />
+                 
+                    </View>
+                   
+       </Modal>
+
         <TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style = {styles.capture}
