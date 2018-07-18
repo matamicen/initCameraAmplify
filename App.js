@@ -11,9 +11,10 @@ import {  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View, Modal, Button} from 'react-native';
+  View, Modal, Button, Linking} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import Muestro from './Muestro';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 
 // const instructions = Platform.select({
@@ -28,7 +29,8 @@ export default class App extends Component {
 
   state = {
     photoConfirm: false,
-    url: ''
+    url: '',
+    scanQR: false
   };
 
   openModalPhotoConfirmation = () => {
@@ -57,9 +59,26 @@ export default class App extends Component {
     }
   };
 
+  scanQR = async function() {
+    this.setState({scanQR: !this.state.scanQR})
+  //  Linking
+  //     .openURL('https://www.cnn.com')
+  //     .catch(err => console.error('An error occured', err));
+
+  }
+
+  onSuccess(e) {
+    Linking
+      .openURL(e.data)
+      .catch(err => console.error('An error occured', err));
+
+      this.setState({scanQR: !this.state.scanQR})
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        {!this.state.scanQR ?
         <RNCamera
             ref={ref => {
               this.camera = ref;
@@ -70,6 +89,21 @@ export default class App extends Component {
             permissionDialogTitle={'Permission to use camera'}
             permissionDialogMessage={'We need your permission to use your camera phone'}
         />
+        :
+        <QRCodeScanner
+        onRead={this.onSuccess.bind(this)}
+        topContent={
+          <Text style={styles.centerText}>
+            Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+          </Text>
+        }
+        bottomContent={
+          <TouchableOpacity style={styles.buttonTouchable}>
+            <Text style={styles.buttonText}>OK. Got it!</Text>
+          </TouchableOpacity>
+        }
+      />
+      }
         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
        
         <Modal visible={this.state.photoConfirm}  transparent={true} animationType={"slide"} onRequestClose={() => console.log('Close was requested')}>
@@ -94,9 +128,13 @@ export default class App extends Component {
 
         <TouchableOpacity
             onPress={this.takePicture.bind(this)}
-            style = {styles.capture}
-        >
+            style = {styles.capture} >
             <Text style={{fontSize: 14}}> SNAP </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            onPress={this.scanQR.bind(this)}
+            style = {styles.capture} >
+            <Text style={{fontSize: 14}}> ScanQR </Text>
         </TouchableOpacity>
         </View>
       </View>
@@ -123,5 +161,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignSelf: 'center',
     margin: 20
-  }
+  },
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777',
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000',
+  },
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)',
+  },
+  buttonTouchable: {
+    padding: 16,
+  },
 });
