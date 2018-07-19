@@ -134,7 +134,7 @@ export default class App extends Component {
         <TouchableOpacity
             onPress={this.scanQR.bind(this)}
             style = {styles.capture} >
-            <Text style={{fontSize: 14}}> ScanQR! </Text>
+            <Text style={{fontSize: 14}}> ScanQR# </Text>
         </TouchableOpacity>
         </View>
       </View>
