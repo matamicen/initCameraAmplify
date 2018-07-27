@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00A35E20F77741DFB56B6E09 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DDE67CBE0840428C58CFD6 /* libRNCamera.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -39,8 +40,8 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C8D03F09FCB442969EB63E22 /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF9FDE4F34409DB0503893 /* libRNAWSCognito.a */; };
-		E888D38608204F958034B0B6 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A457219D055D4AD1828CCC02 /* libReactNativePermissions.a */; };
 		E4E2FA8CB159405F89881A68 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3391EC8D43E6458B9AC0EBBD /* libRNFetchBlob.a */; };
+		E888D38608204F958034B0B6 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A457219D055D4AD1828CCC02 /* libReactNativePermissions.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,6 +318,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNAWSCognito;
 		};
+		67BC60AC210B8E990087E876 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBD8FAE90076412D80700781 /* RNFetchBlob.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A15C300E1CD25C330074CB35;
+			remoteInfo = RNFetchBlob;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -364,6 +372,7 @@
 		2D02E47B1E0B4A5D006451C7 /* initCamera-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "initCamera-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* initCamera-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "initCamera-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3391EC8D43E6458B9AC0EBBD /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		5900A31C78A7488CA43E1A7A /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "../node_modules/amazon-cognito-identity-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -373,8 +382,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BDFF9FDE4F34409DB0503893 /* libRNAWSCognito.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAWSCognito.a; sourceTree = "<group>"; };
 		CCC07FEECA044156ADF11A22 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
-		DBD8FAE90076412D80700781 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		3391EC8D43E6458B9AC0EBBD /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		DBD8FAE90076412D80700781 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,6 +591,7 @@
 				A3DDE67CBE0840428C58CFD6 /* libRNCamera.a */,
 				A457219D055D4AD1828CCC02 /* libReactNativePermissions.a */,
 				BDFF9FDE4F34409DB0503893 /* libRNAWSCognito.a */,
+				3391EC8D43E6458B9AC0EBBD /* libRNFetchBlob.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -599,6 +608,14 @@
 			isa = PBXGroup;
 			children = (
 				67A0CA8B2100E31F008F8250 /* libRNAWSCognito.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		67BC60A9210B8E990087E876 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67BC60AD210B8E990087E876 /* libRNFetchBlob.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -855,6 +872,10 @@
 				{
 					ProductGroup = 67661E8B20FD65C400B42688 /* Products */;
 					ProjectRef = CCC07FEECA044156ADF11A22 /* RNCamera.xcodeproj */;
+				},
+				{
+					ProductGroup = 67BC60A9210B8E990087E876 /* Products */;
+					ProjectRef = DBD8FAE90076412D80700781 /* RNFetchBlob.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1125,6 +1146,13 @@
 			fileType = archive.ar;
 			path = libRNAWSCognito.a;
 			remoteRef = 67A0CA8A2100E31F008F8250 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		67BC60AD210B8E990087E876 /* libRNFetchBlob.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFetchBlob.a;
+			remoteRef = 67BC60AC210B8E990087E876 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {

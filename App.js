@@ -11,7 +11,7 @@ import {  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View, Modal, Button, Linking} from 'react-native';
+  View, Modal, Button, Linking, Platform} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import Muestro from './Muestro';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -87,14 +87,16 @@ export default class App extends Component {
         rdsUrl = urls3+'images/'+fileName2;
         console.log('RDSurl final: '+rdsUrl);
 
-
-
-        console.log('contenido fileaux: '+fileaux);
-        // let cleanUri =  fileaux.replace("file:///", 'file://');
-        //  console.log('url limpia:' +cleanUri) ;
+        let fileauxFinal = fileaux;
+        if (Platform.OS == 'ios')
+        {
+          fileauxFinal =  fileaux.replace("file:///", '');
+        }
+        console.log('contenido fileauxFinal: '+fileauxFinal);
+   
 
 //, contentType: 'image/png'
-         return this.readFile(fileaux)
+         return this.readFile(fileauxFinal)
          .then(buffer => Storage.vault.put('images/'+fileName2, buffer, { level: 'protected' }))
          .then (result => {
                   console.log('resultado:'+result.key);
