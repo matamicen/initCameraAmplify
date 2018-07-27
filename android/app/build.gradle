@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':rn-fetch-blob')
     compile project(':amazon-cognito-identity-js')
     compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])

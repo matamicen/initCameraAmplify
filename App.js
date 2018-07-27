@@ -17,6 +17,9 @@ import Muestro from './Muestro';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Amplify, { Auth, API, Storage, Analytics } from 'aws-amplify';
 import awsconfig from './src/aws-exports';
+import { Buffer } from 'buffer';
+import RNFetchBlob from 'rn-fetch-blob';
+
 
 
 Amplify.configure(awsconfig);
@@ -58,6 +61,12 @@ export default class App extends Component {
     });
   }
 
+  readFile = (filePath) => {
+   
+    return RNFetchBlob.fs.readFile(filePath, 'base64').then(data => new Buffer(data, 'base64'));
+   
+  }
+
 
   signIn = async () => {
     await Auth.signIn('LU2ACH', 'sabrina')
@@ -66,7 +75,83 @@ export default class App extends Component {
 
     try {
       const { identityId } = await Auth.currentCredentials();
-      console.log('la credencial es:' + identityId)
+      console.log('la credencial es:' + identityId);
+      var res = identityId.replace(":", "%3A");
+      console.log('la url S3 es: ' + 'https://s3.amazonaws.com/sqso/protected/'+res+'/');
+      //this.props.setUrlRdsS3('https://s3.amazonaws.com/sqso/protected/'+res+'/');
+      var urls3 = 'https://s3.amazonaws.com/sqso/protected/'+res+'/';
+      fileaux =  this.state.url;
+      console.log("fileaux uri:"+ fileaux);
+
+        fileName2 = fileaux.replace(/^.*[\\\/]/, '');
+        rdsUrl = urls3+'images/'+fileName2;
+        console.log('RDSurl final: '+rdsUrl);
+
+
+
+        console.log('contenido fileaux: '+fileaux);
+        // let cleanUri =  fileaux.replace("file:///", 'file://');
+        //  console.log('url limpia:' +cleanUri) ;
+
+//, contentType: 'image/png'
+         return this.readFile(fileaux)
+         .then(buffer => Storage.vault.put('images/'+fileName2, buffer, { level: 'protected' }))
+         .then (result => {
+                  console.log('resultado:'+result.key);
+                  // actualizo SENT como TRUE en mediafile para ese file.
+                
+                })
+                .catch(err => {
+                  console.log(JSON.stringify(err));
+                  console.log("fallo el UPLOAD UPLOAD UPLOADS3");
+                });
+    
+    
+
+        //  .then(fileInfo => ({ key: fileInfo.key }))
+        //  .then(x => console.log('SAVED', x) || x);
+
+/// agrego
+// RNFetchBlob
+//       .config({
+//         fileCache: true,
+//         appendExt: 'jpg',
+//       })
+//       .fetch('GET', fileaux, {
+//       })
+//       .then((res) => {
+//       //  upload to storage
+//         this.readFile(res.data)
+//           .then(buffer => Storage.vault.put('image.jpg', buffer, { level: 'protected', contentType: 'image/png' }))
+//           .then(x => console.log('SAVED', x) || x);
+//       });
+  
+
+
+/// agrego
+      //   console.log('llamo Storage: ');
+      // const stored = Storage.vault.put('images/'+fileName2, fileaux, {
+      //     level: 'protected'})
+      //       .then (result => {
+      //         console.log(result);
+      //         // actualizo SENT como TRUE en mediafile para ese file.
+            
+
+            
+      //       })
+      //       .catch(err => {
+      //         console.log(JSON.stringify(err));
+      //         console.log("fallo el UPLOAD UPLOAD UPLOADS3");
+             
+            
+            
+      //       });
+
+
+
+
+
+
     }
     catch (e) {
       console.log('caught error', e);
