@@ -15,6 +15,11 @@ import {  Dimensions,
 import { RNCamera } from 'react-native-camera';
 import Muestro from './Muestro';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Amplify, { Auth, API, Storage, Analytics } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+
+
+Amplify.configure(awsconfig);
 
 
 // const instructions = Platform.select({
@@ -27,11 +32,17 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class App extends Component {
 
-  state = {
-    photoConfirm: false,
-    url: '',
-    scanQR: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      photoConfirm: false,
+      url: '',
+      scanQR: false
+    };
+  
+  }
+
 
   openModalPhotoConfirmation = () => {
     
@@ -45,6 +56,25 @@ export default class App extends Component {
     this.setState({
       photoConfirm: false
     });
+  }
+
+
+  signIn = async () => {
+    await Auth.signIn('LU2ACH', 'sabrina')
+      .then(() => console.log('entro!'))
+      .catch(err => console.log('error:', err))
+
+    try {
+      const { identityId } = await Auth.currentCredentials();
+      console.log('la credencial es:' + identityId)
+    }
+    catch (e) {
+      console.log('caught error', e);
+      // Handle exceptions
+    }
+    session = await Auth.currentSession();
+
+    console.log("token: " + session.idToken.jwtToken);
   }
 
   takePicture = async function() {
@@ -125,7 +155,11 @@ export default class App extends Component {
                     </View>
                    
        </Modal>
-
+       <TouchableOpacity
+            onPress={this.signIn.bind(this)}
+            style = {styles.capture} >
+            <Text style={{fontSize: 14}}> SignIn </Text>
+        </TouchableOpacity>
         <TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style = {styles.capture} >
